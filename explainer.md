@@ -95,18 +95,17 @@ The aim of this work is to **not**:
 ### The Incomplete MoLE Dependency
 
 This approach builds on the
-[MoLE Architecture](https://moderation-of-unlinkable-endorsements.github.io/internet-drafts/draft-jms-mole-architecture.html)
-and assumes that it is realizable. It's
-[new cryptography](https://moderation-of-unlinkable-endorsements.github.io/internet-drafts/draft-authors-mole-crypto.html)
-is needed to communicate only the information we want with our messages and the
+[MoLE Architecture](https://moderation-of-unlinkable-endorsements.github.io/internet-drafts/draft-jms-mole-architecture.html),
+though the work there isn't done. It's
+[new protocols](https://moderation-of-unlinkable-endorsements.github.io/internet-drafts/draft-authors-mole-protocols.html)
+are needed to communicate only the information we want with our messages and the
 [HTTP transport](https://moderation-of-unlinkable-endorsements.github.io/internet-drafts/draft-jms-mole-http-transport.html)
 gives us the language needed for us to send those messages between clients and
-servers. None of these are done, but there is enough structure to plan how they
-ladder up to the web.
+servers. 
 
-Even though it is early, I think it is worth discussing the deployment-specific
-considerations that will have to be made if MoLE makes its way into browsers to
-allow constructive feedback on the primitives.
+Even though it is early, there is enough structure there to make it worth 
+discussing the deployment-specific considerations that will have to be made if 
+MoLE is to make its way into browsers.
 
 ## How does this work?
 
@@ -118,10 +117,10 @@ together.
     more expensive action, like posting a comment or searching a database
     repeatedly. They want to mitigate abuse while minimizing friction for
     users.
-- Site M, who manages abuse mitigation for Site F. Right now they
+- Service M, who manages abuse mitigation for Site F. Right now they
     initially fingerprint a user and if they are suspicious of that
     fingerprint's activity they force the client to complete some contrived
-    busywork.
+    busywork. This may be same-site or cross-site to Site F.
 - Site A, where a user both has an account on and has a history of normal use.
     They, like everyone, dislike CAPTCHAs and want their users to see fewer
     in their life.
@@ -148,11 +147,11 @@ the top-level document.
 ### Moderator use
 
 Now, some time later, our user is visiting Site F and as part of their normal
-actions trigger an anti-abuse check. Site F fetches some resources from Site M,
-either as scripts or an iframe, and as part of their bot-or-not confidence
-calculation, decides that anchor endorsement would be useful. Site M declares
-a set of anchors that it trusts equally and asks the browser to provide a proof
-of endorsement from one of those anchors.
+actions trigger an anti-abuse check. Site F fetches some resources from 
+Service M, either as scripts or an iframe, and as part of their bot-or-not 
+confidence calculation, decides that anchor endorsement would be useful. Service 
+M declares a set of anchors that it trusts equally and asks the browser to 
+provide a proof of endorsement from one of those anchors.
 
 Again, this could be done in a few ways. Imperatively, this would be a call to
 `navigator.endorsement.challenge("/moderator_uri", challengeOptions)`. What has
@@ -163,7 +162,7 @@ time, or request that this use is bound to.
 
 If the browser hasn't already used that moderator, it will have to get a
 credential from it at this point. This is done through some Fetching from
-Site M while providing a proof that you have an endorsement from one of the
+Service M while providing a proof that you have an endorsement from one of the
 anchors it trusts. Critically, this doesn't reveal which anchor endorsed the
 user, just that one of them did.
 
