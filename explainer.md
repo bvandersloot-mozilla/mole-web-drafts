@@ -145,7 +145,7 @@ this may carry.
 A website can endorse a client in a few different ways. Imperatively, this is
 a call to `navigator.endorsement.collect("/endorsement_uri")`.
 Declaratively, this is adding the tag `<link rel="endorsement"
-href="/endorsement_uri" > to a document's head.
+href="/endorsement_uri" >` to a document's head.
 
 Either of these would cause a POST Fetch to the URL provided, following one
 of the
