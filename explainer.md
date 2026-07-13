@@ -39,8 +39,8 @@
 ## Introduction
 
 Websites have few options at hand to limit abusive or high-volume traffic and
-none of them are very good for users. Tracking users uniquely across the web is
-a violation of their privacy. CAPTCHAs introduce a cost to many visitors
+none of them are very good. Tracking users across the web based on apparent fingerprint is
+a violation of their privacy. CAPTCHAs introduce a friction to many visitors
 to a site, particularly to users that use privacy-enhancing user agents. Client
 integrity checks close off the Web to many users.
 
@@ -51,7 +51,7 @@ which is an attempt to solve the
 [PACT problem statement](https://github.com/antifraudcg/proposals/issues/22),
 from the W3C Anti-Fraud CG.
 
-When a user visits that is confident the user is genuine, that site may
+When a user visits that a site is confident the user is genuine, that site may
 _endorse_ that user. Later, when the user visits a different site for the first
 time, the user may redeem their endorsement with a service that the site uses
 for access control, called a _moderator_. The user proves that they (1) were
@@ -100,11 +100,11 @@ The aim of this work is to **not**:
 - Create a new vector for cross-site tracking
 
 
-### The Incomplete MoLE Dependency
+### MoLE Dependency
 
 This approach builds on the
 [MoLE Architecture](https://datatracker.ietf.org/doc//draft-jms-mole-architecture),
-though the work there isn't done. It's
+though the work there isn't yet final. Its
 [new protocols](https://datatracker.ietf.org/doc/draft-jms-mole-protocols)
 are needed to communicate only the information we want with our messages and the
 [HTTP transport](https://datatracker.ietf.org/doc/draft-jms-mole-http-transport)
@@ -117,8 +117,8 @@ MoLE is to make its way into user agents.
 
 ## How does this work?
 
-The power of Moderated Endorsements is that we can share information across
-sites, so to explore it fully, we have to imagine a few sites willing to work
+The benefit of Moderated Endorsements is that it allows us to share information across
+sites. To explore it fully, we therefore have to imagine a few sites willing to work
 together.
 
 - Site F, where a user is visiting for the first time and wants to take some
@@ -178,7 +178,8 @@ user, just that one of them did.
 With a credential for the moderator in hand, the user agent presents its
 credential by fetching the URL provided with a
 `Authorization: Mole presentation="<credential-presentation>"` request
-header. The moderator can prove that the presentation is valid and determines
+header, or whatever is finalized in the [transport definition](https://datatracker.ietf.org/doc/draft-jms-mole-http-transport/). 
+The moderator can prove that the presentation is valid and determines
 how it wants to update the associated state of the credential. The user agent
 uses the response from the moderator to update the credential state and returns
 it to the caller.
