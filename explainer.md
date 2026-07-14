@@ -51,7 +51,7 @@ which is an attempt to solve the
 [PACT problem statement](https://github.com/antifraudcg/proposals/issues/22),
 from the W3C Anti-Fraud CG.
 
-When a user visits that a site is confident the user is genuine, that site may
+When a user visits a site that is confident the user is genuine, that site may
 _endorse_ that user. Later, when the user visits a different site for the first
 time, the user may redeem their endorsement with a service that the site uses
 for access control, called a _moderator_. The user proves that they (1) were
